@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+
+# database configuration
+/config
+.sequelizerc
+
+# evironment variables
+.env
