@@ -144,9 +144,6 @@ module.exports = {
   
       const driverRows = drivers[0];
 
-      console.log(driverRows)
-  
-
       return await queryInterface.bulkInsert('Cars', [{
         DriverId: driverRows[0].id,
         make: 'mercedez',
