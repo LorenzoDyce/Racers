@@ -1,0 +1,36 @@
+
+a {
+    position: relative;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 500;
+}
+
+a:visited { 
+    text-decoration: none;
+    color:rgb(69, 69, 69); 
+    
+    }
+a:hover { 
+  position: relative;
+  text-decoration: none;
+    }
+a:focus { 
+    text-decoration: none;
+    color:rgb(80, 122, 227);
+    
+    }
+a:hover, a:active {
+    position: relative;
+    text-decoration: none; 
+    color:rgb(255, 255, 255);
+    background-color: rgb(84, 84, 84);
+    border-radius: 5px;
+}
+
+
+div.links {
+    position: fixed;
+    right: 100px;
+    margin-top: 40px;
+}
