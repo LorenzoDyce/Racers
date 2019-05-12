@@ -9,7 +9,7 @@ dotenv.config();
 // Get all drivers
 router.get('/', (req, res) => {
     models.Driver.findAll().then(driver => {
-    res.json(driver);
+    res.send(driver);
     })
  })
 
@@ -17,26 +17,24 @@ router.get('/', (req, res) => {
 // Get all drivers and their car
 router.get('/driverscars', (req, res) => {
     models.Driver.findAll({include: [ models.Car ]}).then(driver => {
-    res.json(driver);
+    res.send(driver);
     })
  })
     
  router.post('/createdriver', (req, res)=> {
 
-models.Driver.create({
-   name: 'Lucas Nao',
-   nationality: 'Portugese',
-   bio: 'Im from portugal'
-}).then(drivers => {
-   drivers.createCar({
-      make: 'Toyota',
-      model: 'camry',
-      transmission: 'auto',
-      year: 2019,
-      color: 'light blue'
-   });
+   models.Driver.create({
+      name: req.body.name,
+      nationality: req.body.nationality,
+      bio: req.body.bio
+    })
+      .then((driver)=> res.status(201).send({
+         name: driver.name,
+         nationality: driver.nationality,
+         bio: driver.bio
+      }))
+      .then(() => res.redirect('/'));
 });
- })
  
 
 
