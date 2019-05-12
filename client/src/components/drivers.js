@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import '../Drivers.css'
 
 
 
@@ -16,15 +18,17 @@ class Drivers extends Component {
 
 
     getDrivers = async () => {
-        fetch(`/drivers`)
-        .then(res => res.json())
-        .then(drivers => this.setState({drivers}, () => console.log('Drivers fetched...', drivers)));
+        axios.get(`/drivers`)
+        .then(res => {
+            const drivers = res.data;
+         this.setState({drivers});
+        })
     }
     render() { 
         return ( 
         <div>
             <h1>Drivers</h1>
-            <ul>
+            <ul className='driverinfo'>
             {this.state.drivers.map(driver => 
             <li key={driver.id}>{driver.name} {driver.nationality} {driver.bio}</li>
             )}
