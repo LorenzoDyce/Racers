@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import './App.css';
-import Drivers from './components/drivers'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Drivers from './components/drivers';
+import CreateDriver from './components/createDriver';
+import Home from './components/home'
+import Error from './components/error'
+import Navigation from './components/navigation'
 
 class App extends Component {
-  state = {  }
   render() { 
-    return ( <div className="App">
-    <Drivers/>
-   </div> );
+    return ( 
+    <BrowserRouter>
+    <div>
+    <Navigation/>
+    <Switch>
+    <Route path='/' component={Home} exact />
+    <Route path='/driverscars' component={Drivers} />
+    <Route path='/createdrivers' component={CreateDriver} />
+    <Route component={Error} />
+    </Switch>
+    </div>
+    </BrowserRouter>
+    );
   }
 }
  
