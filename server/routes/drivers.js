@@ -36,6 +36,27 @@ router.get('/driverscars', (req, res) => {
       .then(() => res.redirect('/'));
 });
  
+router.put('/updatedriver/:driverId', (req, res)=> {
+   models.Driver.update(
+   {name: req.body.name},
+   {nationality: req.body.nationality},
+   {bio: req.body.bio},
+   {where: req.params.id}
+   )
+   .then((driverUpdated) => {
+      res.json(driverUpdated)
+   })
+});
 
+
+router.delete('/deletedriver/:driverId', (req, res)=> {
+   const id = req.params.id;
+   models.Driver.destroy({
+   where: { id: id}
+      })
+   .then((driverDeleted) => {
+      res.json(driverDeleted)
+   })
+})
 
 module.exports = router;
