@@ -5,6 +5,7 @@ import CreateDriver from './components/createDriver';
 import Home from './components/home'
 import Error from './components/error'
 import Navigation from './components/navigation'
+import UpdateDriver from './components/updateDriver';
 
 class App extends Component {
   render() { 
@@ -16,6 +17,7 @@ class App extends Component {
     <Route path='/' component={Home} exact />
     <Route path='/driverscars' component={Drivers} />
     <Route path='/createdrivers' component={CreateDriver} />
+    <Route path='/updatedrivers' component={UpdateDriver} />
     <Route component={Error} />
     </Switch>
     </div>
