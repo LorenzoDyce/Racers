@@ -8,7 +8,8 @@ const Navigation = () => {
         <div className="links">
          <NavLink to='/' activeClassName="current">Home</NavLink>
          <NavLink to='/createdrivers' activeClassName="current">Sign Up</NavLink>  
-         <NavLink to='/driverscars' activeClassName="current">Drivers</NavLink>      
+         <NavLink to='/driverscars' activeClassName="current">Drivers</NavLink>   
+         <NavLink to='/updatedrivers' activeClassName="current">Edit</NavLink>     
         </div>
      );
 }
