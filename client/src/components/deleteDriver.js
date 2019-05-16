@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../createDriver.css'
 
 
-class CreateDriver extends Component {
+class DeleteDriver extends Component {
     state = {
         id: '', 
         name: '',
@@ -11,11 +11,8 @@ class CreateDriver extends Component {
         bio: ''
      }
       
-     handleChange = event => {
-         this.setState({ [ event.target.name]: event.target.value })
-     }
 
-     handleSubmit = event => {
+     handleDelete = event => {
          event.preventDefault();
          const {id, name, nationality, bio } = this.state;
 
@@ -26,7 +23,7 @@ class CreateDriver extends Component {
              bio
          };
 
-    axios.delete(`/deletedriver/:driverId`, driver.id)
+    axios.delete(`/deletedriver/${this.state.id}`, driver.id)
        .then(res => {
         console.log(res);
         console.log(res.data);
@@ -35,31 +32,13 @@ class CreateDriver extends Component {
         console.log(error);
     })
 }
-    render() { 
-        const {name, nationality, bio} =this.state
+    render() {
         return ( 
         <div>
-            <form onSubmit={this.handleSubmit}>
-            <div>
-            <label>
-                Name:
-                <input type="text" name="name" value={name} onChange={this.handleChange} />
-            </label></div>
-            <div>
-            <label>
-                Nationality:
-                <input type="text" name="nationality" value={nationality} onChange={this.handleChange} />
-            </label></div>
-            <div>
-            <label>
-                Bio:
-                <input type="text" name="bio" value={bio} onChange={this.handleChange} />
-            </label> </div>
-            <button type="submit">delete</button>
-            </form>
+            <button onClick={this.handleDelete}>delete</button>
         </div> 
         )
     }
 }
  
-export default CreateDriver;
+export default DeleteDriver;
