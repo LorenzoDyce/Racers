@@ -4,7 +4,9 @@ import axios from 'axios';
 
 
 class UpdateDriver extends Component {
-    state = { 
+   
+    state = {
+     id: '', 
      name: '',
      nationality: '',
      bio: ''
@@ -14,7 +16,7 @@ class UpdateDriver extends Component {
     this.setState({[event.target.name]: event.target.value})
     }
 
-   handleSubmit = (event) => {
+   handleUpdate = (event) => {
    event.preventDefault();
    const {name, nationality, bio } = this.state;
    const driver = {
@@ -22,7 +24,7 @@ class UpdateDriver extends Component {
        nationality,
        bio
    }
-   axios.put(`/updatedriver/:driverId`, driver)
+   axios.put(`/updatedriver/${this.state.id}`, driver)
    .then(res => console.log(res.data));
    }
 
@@ -47,7 +49,7 @@ class UpdateDriver extends Component {
                     Bio:
                     <input type="text" name="bio" value={bio} onChange={this.handleChange}/>
                 </label>
-                <button type="submit">Update</button>
+                <button >Update</button>
                 </form>
             </div>
         );
