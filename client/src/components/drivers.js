@@ -13,52 +13,32 @@ class Drivers extends Component {
 
 
 
-   componentDidMount () {
-    this.getDrivers();
+   async componentDidMount() {
+      const {data: drivers } = await axios.get(`/drivers`);
+      this.setState({ drivers });
     }
 
 
-    getDrivers = async () => {
-        axios.get(`/drivers`)
-        .then(res => {
-            const drivers = res.data;
-         this.setState({drivers});
-        })
+
+    handleUpdate = async (driver) => {
+     driver.name = '';
+     driver.nationality = '';
+     driver.bio = '';
+     const { data } = await axios.put(`/updatedriver/${driver.id}`, driver);
+     const drivers = [...this.state.drivers];
+     const index = drivers.indexOf(driver);
+     drivers[index] = driver;
+     this.setState({ drivers });
     }
 
 
-    handleUpdate = (event) => {
-        event.preventDefault();
-        const {name, nationality, bio } = this.state;
-        const driver = {
-            name,
-            nationality,
-            bio
-        }
-        axios.put(`/updatedriver/${this.state.id}`, driver)
-        .then(res => console.log(res.data));
-        }
 
-
-
-        handleDelete = event => {
-            event.preventDefault();
-            const {id, name, nationality, bio } = this.state;
-            const driver = {
-                id,
-                name,
-                nationality,
-                bio
-            };
-   
-       axios.delete(`/deletedriver/${this.state.id}`, driver.id)
-          .then(res => {
-           console.log(res);
-           console.log(res.data);
-       })
-       .catch(error => {
-           console.log(error);
-       })
+        
+        
+   handleDelete = async (driver) => {
+       await axios.delete(`/deletedriver/${driver.id}`);
+       const drivers = this.state.drivers.filter(d => d.id !== driver.id);
+       this.setState({ drivers });
    }
 
     render() { 
@@ -67,8 +47,8 @@ class Drivers extends Component {
             <h1>Drivers</h1>
             <ul className='driverinfo'>
             {this.state.drivers.map(driver => 
-            <li key={driver.id}>{driver.name} {driver.nationality} {driver.bio}  <button onClick={this.handleUpdate}>Edit</button>
-            <button onClick={this.handleDelete}>Delete</button> </li>
+            <li key={driver.id}>{driver.name} {driver.nationality} {driver.bio}  <button onClick={() =>this.handleUpdate}>Edit</button>
+            <button onClick={() =>this.handleDelete}>Delete</button> </li>
             )}
             </ul>
         </div> 
